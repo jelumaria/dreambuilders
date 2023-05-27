@@ -1,0 +1,8 @@
+1.Profile management 
+2.User registration and login 
+3.users can search the building plan 
+3.Ability to view user requirement
+4.Status update for building plan
+5.Add building requirements 
+6.Equipment rental management 
+7.Customer support 
