@@ -19,6 +19,8 @@
             <th>Remarks</th>
             <th>Date / Time</th>
             <th>Action</th>
+            <th>Download</th>
+
         </tr>
              </thead>
         {% for c in proposal_list %}
@@ -32,8 +34,8 @@
             <td>{{ c.remark }}</td>
             <td>{{ c.dt }}/{{ c.tm }}</td>
             <td>
-                <a href="../user_architect_proposal_delete?id={{c.id}}" class="btn btn-info" >Delete</a> |
-                <a href="?download_document={{ document.id }}" class="btn btn-info">Download</a>
+                <a href="../user_architect_proposal_delete?id={{c.id}}" class="btn btn-info" >Delete</a> |</td>
+            <td>    <a href="?download_document={{ c.id }}" class="btn btn-info">Download</a>
             </td>
         </tr>
              </tbody>

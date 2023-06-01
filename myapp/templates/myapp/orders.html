@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Address Field</title>
+</head>
+<body>
+    
+  <div class="container">
+    <h1>Confirm Booking </h1>
+    
+    <form method="POST" action="">
+        {% csrf_token%}
+      <div class="form-group">
+        <label for="name">Equipment Name</label>
+        <input type="text" class="form-control" value={{or.eq.equ_name}} id="name" disabled>
+      </div>
+      <div class="form-group">
+        <label for="name">No of Equipments</label>
+        <input type="text" class="form-control" value={{or.no}} id="name" disabled>
+      </div>
+      <div class="form-group">
+        <label for="name">No. of Days</label>
+        <input type="text" class="form-control" value={{or.day}} id="name" disabled>
+      </div>
+      <div class="form-group">
+        <label for="name">Daily rate</label>
+        <input type="text" class="form-control" value={{or.eq.daily_rate}} id="name" disabled>
+      </div>
+      
+      <div class="form-group">
+        <label for="address">Address</label>
+        <textarea class="form-control" name="add" id="address" rows="3"></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="total-price">Total Price</label>
+        <input type="text" class="form-control" value={{or.total}} id="total-price" disabled>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">PAY</button>
+    </form>
+  </div>
+  
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

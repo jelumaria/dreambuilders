@@ -3,6 +3,7 @@ from django.shortcuts import render,redirect
 # Create your views here.
 from django.db.models import Max
 from .models import *
+from django.contrib import messages
 
 def index(request):
     return render(request, './myapp/index.html')
@@ -802,16 +803,15 @@ def user_architect_proposal_delete(request):
     context ={'architect_list':ar_l, 'proposal_list': pm_l, 'msg':'Record deleted'}
     return render(request, 'myapp/user_architect_proposal_view.html', context)
 
+from django.shortcuts import render
 from django.http import FileResponse
-from django.conf import settings
-import os
+from myapp.models import user_proposal
 
-def  user_architect_proposal_view(request):
+def user_architect_proposal_view(request):
     user_id = request.session['user_id']
-    pm_l = user_proposal.objects.filter(user_id=int(user_id))
-    ar_l = architect_details.objects.all()
+    proposal_list = user_proposal.objects.filter(user_id=int(user_id))
 
-    context = {'architect_list': ar_l, 'proposal_list': pm_l, 'msg': ''}
+    context = {'proposal_list': proposal_list}
 
     download_document_id = request.GET.get('download_document')
     if download_document_id:
@@ -819,9 +819,9 @@ def  user_architect_proposal_view(request):
             document_id = int(download_document_id)
             document = user_proposal.objects.get(id=document_id)
 
-            document_path = document.filepath.path
+            document_path = document.file.path
 
-            if os.path.exists(document_path):
+            if document_path:
                 with open(document_path, 'rb') as file:
                     response = FileResponse(file)
                     return response
@@ -829,6 +829,15 @@ def  user_architect_proposal_view(request):
             pass
 
     return render(request, 'myapp/user_architect_proposal_view.html', context)
+
+
+
+
+
+
+
+
+
 
 def admin_user_details(request):
     jm_l = user_details.objects.all()
@@ -848,11 +857,23 @@ def rent(request,id):
         no=request.POST["num"]
         day=request.POST["days"]
         total=(eq.daily_rate * int(no)) * int(day)
-        new=order.objects.create(eq=eq,total=total)
+        new=order.objects.create(eq=eq,total=total,no=no,day=day)
         new.save()
-        return redirect("http://127.0.0.1:8000/myapp/equipments-details")
+        return redirect(f"http://127.0.0.1:8000/ord/{new.id}")
+        
     context={'eq':eq}
     return render(request,'./myapp/rent.html',context)
+
+def ord(request,id):
+    k=order.objects.get(id=id)
+    if request.method == "POST":
+        ad=request.POST["add"]
+        k.address=ad
+        k.save()
+        messages.info(request,"order placed")
+        return redirect("http://127.0.0.1:8000/myapp/equipments-details")
+    else:
+        return render(request,'./myapp/orders.html',{'or':k})
 
 def order_details(request):
     # Retrieve the order details from the database

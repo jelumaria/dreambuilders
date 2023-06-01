@@ -65,6 +65,7 @@ class order(models.Model):
     no = models.IntegerField(max_length=100,null=True)
     day = models.IntegerField(max_length=100,null=True)
     total=models.FloatField()
+    address=models.CharField(max_length=100,null=True)
 
 class plan_details(models.Model):
     ar_plan_id = models.IntegerField()
@@ -87,7 +88,8 @@ class user_proposal(models.Model):
     remark = models.CharField(max_length=250)
     dt = models.CharField(max_length=25)
     tm = models.CharField(max_length=25)
-    status = models.CharField(max_length=25)
+    status = models.CharField(max_length=25,null=True)
+    file = models.FileField(upload_to='documents/',null=True)
 
 class user_rating(models.Model):
     user_id = models.IntegerField()
@@ -108,7 +110,7 @@ class sales_master(models.Model):
     dt = models.CharField(max_length=25)
     tm = models.CharField(max_length=25)
 
-class Document(models.Model):
-    file = models.FileField(upload_to='documents/')
+
+   
 
 

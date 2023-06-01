@@ -15,4 +15,5 @@ admin.site.register(user_proposal)
 admin.site.register(user_rating)
 admin.site.register(sales_master)
 admin.site.register(Equipment)
-admin.site.register(Document)
+
+

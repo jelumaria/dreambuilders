@@ -87,7 +87,8 @@ urlpatterns = [
     path('admin_architect_details', views.admin_architect_details, name='admin_architect_details'),
     path('rent/<int:id>',views.rent),
     path('order_details/',views.order_details, name='order_details'),
-  
+    path('ord/<int:id>',views.ord),
+    
 
 
 
